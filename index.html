@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png" />
+
+    <title>Interactive card details form</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --white: hsl(0, 0%, 100%);
+        --Lightgrayishviolet: hsl(270, 3%, 87%);
+        --Darkgrayishviolet: hsl(279, 6%, 55%);
+        --Verydarkviolet: hsl(278, 68%, 11%);
+        --family: "Space Grotesk", sans-serif;
+      }
+      * {
+        border: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: var(--family);
+        overflow: hidden;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        overflow: hidden;
+      }
+      .img {
+        width: 33.5%;
+        height: 100vh;
+        background-image: url(./images/bg-main-desktop.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      /* Card style */
+      .cardcontainer {
+        position: absolute;
+        top: 10rem;
+        left: 15rem;
+      }
+      /* Front Card style */
+      .card1 {
+        /* display: none; */
+        width: 24rem;
+        height: 12rem;
+        background-image: url(./images/bg-card-front.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding: 1.5rem;
+      }
+      .circle {
+        display: flex;
+      }
+      .whiteroundcircle {
+        border-radius: 50%;
+        background-color: var(--white);
+        color: var(--white);
+        width: 2rem;
+        height: 2rem;
+      }
+      .whitebordercircle {
+        border-radius: 50%;
+        background-color: transparent;
+        border: 1px solid var(--white);
+        width: 1rem;
+        height: 1rem;
+        margin: 0.5rem 1rem;
+      }
+      .cardnumber {
+        color: var(--white);
+        margin-top: 3rem;
+        font-size: 25px;
+        font-weight: light;
+      }
+      .nameandexp {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 3rem;
+        margin-top: 1rem;
+        color: var(--white);
+      }
+      .cvc {
+        color: var(--white);
+        position: relative;
+        top: 85px;
+        left: 270px;
+      }
+      /* Back Card Style */
+      .card2 {
+        /* display: none; */
+        width: 24rem;
+        height: 12rem;
+        background-image: url(./images/bg-card-back.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        font-size: 16px;
+        margin-top: 25px;
+        margin-left: 50px;
+      }
+
+      /* Main 1 styles */
+      .container1 {
+        width: 66.5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .mainform {
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        width: 350px;
+      }
+      label {
+        font-size: smaller;
+        font-weight: bold;
+        color: var(--Verydarkviolet);
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      input {
+        border: 2px solid var(--Lightgrayishviolet);
+        border-radius: 5px;
+        padding: 8px;
+      }
+      .expandcvc {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+      .expwrapper {
+        margin-right: 13px;
+      }
+
+      .mmyy {
+        display: flex;
+        gap: 8px;
+      }
+      .mmyy input {
+        margin-top: 0.5rem;
+      }
+      .mm,
+      .yy {
+        width: 4.3rem;
+      }
+      .cvcwrapper input {
+        margin-top: 0.5rem;
+        width: auto;
+      }
+      button {
+        border-radius: 5px;
+        padding: 8px;
+        color: var(--white);
+        background-color: var(--Verydarkviolet);
+        border: none;
+      }
+      /* Main 2 success styles */
+      .container2 {
+        width: 66.5%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .container2 img {
+        width: 45px;
+        margin-bottom: 20px;
+      }
+      .container2 h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .container2 p {
+        font-size: 15px;
+        margin-bottom: 30px;
+      }
+      .container2 button {
+        width: 300px;
+      }
+
+      @media screen and (max-width: 426px) {
+        body {
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .img {
+          width: 100vw;
+          height: 30%;
+          background-size: cover;
+        }
+        .container1 {
+          margin-bottom: 6rem;
+          width: 100vw;
+          height: 50vh;
+        }
+        .mainform {
+          width: 250px;
+        }
+        .cvcwrapper input {
+          width: 5.7rem;
+        }
+
+        /* Card Mobile Style */
+        .cardcontainer {
+          display: flex;
+          flex-direction: column-reverse;
+          top: 0px;
+          left: 0px;
+        }
+        .card1,
+        .card2 {
+          width: 15rem;
+          height: 9rem;
+        }
+        .card1 {
+          position: relative;
+          top: -55px;
+          left: 20px;
+          padding: 1rem;
+        }
+        .cvc {
+          top: 58px;
+          left: 190px;
+          font-size: 10px;
+        }
+        .cardnumber {
+          margin-top: 1.5rem;
+          font-size: 15px;
+        }
+        .nameandexp {
+          margin-right: 1.5rem;
+          margin-top: 0.5rem;
+          font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="img"></div>
+    <div class="cardcontainer">
+      <!-- Front Card -->
+      <div class="card1">
+        <div class="circle">
+          <span class="whiteroundcircle"></span>
+          <span class="whitebordercircle"></span>
+        </div>
+        <h1 class="cardnumber">0000 0000 0000 0000</h1>
+        <div class="nameandexp">
+          <p class="cardname">JANE APPLESEED</p>
+          <p class="exp">00/00</p>
+        </div>
+      </div>
+      <!-- Back Card -->
+      <div class="card2">
+        <p class="cvc">000</p>
+      </div>
+    </div>
+    <!-- Main Form Section -->
+    <main class="container1">
+      <form action="#" class="mainform" novalidate>
+        <label for="name">CARDHOLDER NAME</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="e.g. Jane Appleseed" />
+        <label for="number">CARD NUMBER</label>
+        <input
+          type="textr"
+          name="number"
+          id="number"
+          placeholder="e.g. 1234 5678 9123 0000" />
+
+        <div class="expandcvc">
+          <div class="expwrapper">
+            <label class="lab1" for="mmm1">EXP. DATE (MM/YY)</label>
+            <div class="mmyy">
+              <input
+                class="mm"
+                id="mmm1"
+                type="number"
+                min="0"
+                max="12"
+                placeholder="MM" />
+              <input class="yy" id="yyy1" type="text" placeholder="YY" />
+            </div>
+          </div>
+
+          <div class="cvcwrapper">
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" placeholder="e.g. 123" />
+          </div>
+        </div>
+        <button type="submit">Confirm</button>
+      </form>
+    </main>
+
+    <!-- Completed state start -->
+    <main class="container2">
+      <img src="./images/icon-complete.svg" alt="" />
+      <h1>THANK YOU!</h1>
+      <p>We've added your card details</p>
+      <button type="submit">Continue</button>
+    </main>
+    <!-- Completed state end -->
+
+    <script></script>
+  </body>
+</html>
