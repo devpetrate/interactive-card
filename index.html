@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/dplogo.png" />
 
     <title>Interactive card details form</title>
 
@@ -23,6 +19,7 @@
         --Darkgrayishviolet: hsl(279, 6%, 55%);
         --Verydarkviolet: hsl(278, 68%, 11%);
         --family: "Space Grotesk", sans-serif;
+        --red: hsla(0, 92%, 62%, 0.714);
       }
       * {
         border: 0;
@@ -124,6 +121,7 @@
         width: 350px;
       }
       label {
+        cursor: pointer;
         font-size: smaller;
         font-weight: bold;
         color: var(--Verydarkviolet);
@@ -135,13 +133,28 @@
         border-radius: 5px;
         padding: 8px;
       }
+      .wrong1,
+      .wrong2,
+      .wrong3,
+      .wrong4 {
+        color: var(--red);
+        font-size: x-small;
+        font-weight: bold;
+      }
+      .wrongalign {
+        display: flex;
+        justify-content: space-around;
+      }
       .expandcvc {
         display: flex;
         flex-direction: row;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
+        /* margin-top: 0.5rem; */
+        margin-bottom: 1.5rem;
+        width: auto;
       }
       .expwrapper {
+        display: flex;
+        flex-direction: column;
         margin-right: 13px;
       }
 
@@ -149,15 +162,19 @@
         display: flex;
         gap: 8px;
       }
-      .mmyy input {
+      /* .mmyy input {
         margin-top: 0.5rem;
-      }
+      } */
       .mm,
       .yy {
         width: 4.3rem;
       }
+      .cvcwrapper {
+        display: flex;
+        flex-direction: column;
+      }
       .cvcwrapper input {
-        margin-top: 0.5rem;
+        /* margin-top: 0.5rem; */
         width: auto;
       }
       button {
@@ -166,6 +183,7 @@
         color: var(--white);
         background-color: var(--Verydarkviolet);
         border: none;
+        cursor: pointer;
       }
       /* Main 2 success styles */
       .container2 {
@@ -174,6 +192,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        /* visibility: hidden; */
       }
       .container2 img {
         width: 45px;
@@ -203,9 +222,10 @@
           background-size: cover;
         }
         .container1 {
-          margin-bottom: 6rem;
+          margin-bottom: 5rem;
           width: 100vw;
           height: 50vh;
+          overflow-y: auto;
         }
         .mainform {
           width: 250px;
@@ -213,7 +233,10 @@
         .cvcwrapper input {
           width: 5.7rem;
         }
-
+        .container2 {
+          position: relative;
+          top: -10rem;
+        }
         /* Card Mobile Style */
         .img {
           display: flex;
@@ -301,40 +324,31 @@
     <!-- Main Form Section -->
     <main class="container1">
       <form action="#" class="mainform" novalidate>
-        <label for="name">CARDHOLDER NAME</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="e.g. Jane Appleseed" />
-        <label for="number">CARD NUMBER</label>
-        <input
-          type="textr"
-          name="number"
-          id="number"
-          placeholder="e.g. 1234 5678 9123 0000" />
+        <label for="cardname1">CARDHOLDER NAME</label>
+        <input type="text" name="cardname1" id="cardname1" placeholder="e.g. Jane Appleseed" />
+        <span class="wrong1"></span>
+        <label for="cardnumber1">CARD NUMBER</label>
+        <input type="text" name="cardnumber1" id="cardnumber1" placeholder="e.g. 1234 5678 9123 0000" />
+        <span class="wrong2"></span>
 
         <div class="expandcvc">
           <div class="expwrapper">
             <label class="lab1" for="mmm1">EXP. DATE (MM/YY)</label>
             <div class="mmyy">
-              <input
-                class="mm"
-                id="mmm1"
-                type="number"
-                min="0"
-                max="12"
-                placeholder="MM" />
+              <input class="mm" id="mmm1" type="text" min="0" max="12" placeholder="MM" />
               <input class="yy" id="yyy1" type="text" placeholder="YY" />
             </div>
+            <span class="wrong3"></span>
           </div>
 
           <div class="cvcwrapper">
             <label for="cvc">CVC</label>
             <input type="text" id="cvc" placeholder="e.g. 123" />
+            <span class="wrong4"></span>
           </div>
         </div>
-        <button type="submit">Confirm</button>
+        <div class="wrongalign"></div>
+        <button class="btn1" type="submit">Confirm</button>
       </form>
     </main>
 
@@ -343,10 +357,122 @@
       <img src="./images/icon-complete.svg" alt="" />
       <h1>THANK YOU!</h1>
       <p>We've added your card details</p>
-      <button type="submit">Continue</button>
+      <button class="btn2" type="submit">Continue</button>
     </main>
     <!-- Completed state end -->
 
-    <script></script>
+    <script>
+      const cardFrontNum = document.querySelector(".cardnumber");
+      const cardFrontName = document.querySelector(".cardname");
+      const cardMY = document.querySelector(".exp");
+      const cardCvc = document.querySelector(".cvc");
+      const page1 = document.querySelector(".container1");
+      const form = document.querySelector(".mainform");
+      // const generalInput = document.querySelector("input");
+      const nameInput = document.querySelector("#cardname1");
+      const cardNumberInput = document.querySelector("#cardnumber1");
+      const mmInput = document.querySelector("#mmm1");
+      const yyInput = document.querySelector("#yyy1");
+      const cvcInput = document.querySelector("#cvc");
+      const btn1 = document.querySelector(".btn1");
+      const errorText = document.querySelector(".wrong1");
+      const errorText2 = document.querySelector(".wrong2");
+      const errorText3 = document.querySelector(".wrong3");
+      const errorText4 = document.querySelector(".wrong4");
+      const page2 = document.querySelector(".container2");
+      const btn2 = document.querySelector(".btn2");
+
+      nameInput.addEventListener("input", () => {
+        cardFrontName.innerHTML = nameInput.value;
+      });
+
+      cardNumberInput.addEventListener("input", () => {
+        const cardNumberValue = cardNumberInput.value.replace(/\s+/g, "");
+        const formattedCardNumber = cardNumberValue.replace(/(\d{4})(?=\d)/g, "$1 ");
+        cardFrontNum.innerHTML = formattedCardNumber;
+      });
+
+      mmInput.addEventListener("input", () => {
+        cardMY.innerHTML = mmInput.value + "/" + yyInput.value;
+      });
+
+      yyInput.addEventListener("input", () => {
+        cardMY.innerHTML = mmInput.value + "/" + yyInput.value;
+      });
+
+      cvcInput.addEventListener("input", () => {
+        cardCvc.innerHTML = cvcInput.value;
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let nameValue = nameInput.value;
+        let cardNumberValue = cardNumberInput.value.replace(/\s+/g, ""); // Remove spaces
+        let formattedCardNumber = cardNumberValue.replace(/(\d{4})(?=\d)/g, "$1 "); // Add spaces after every 4 digits
+        let mmValue = mmInput.value;
+        let yyValue = yyInput.value;
+        let cvcValue = cvcInput.value;
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          let nameValue = nameInput.value;
+          let cardNumberValue = cardNumberInput.value.replace(/\s+/g, "");
+          let formattedCardNumber = cardNumberValue.replace(/(\d{4})(?=\d)/g, "$1 ");
+          let mmValue = mmInput.value;
+          let yyValue = yyInput.value;
+          let cvcValue = cvcInput.value;
+
+          if (nameValue.length >= 5 && cardNumberValue.length === 16 && !isNaN(cardNumberValue) && mmValue.length === 2 && yyValue.length === 2 && cvcValue.length === 3) {
+            page1.style.display = "none";
+            page2.style.display = "flex";
+            hideAllErrorMessages();
+            setInputBorder("var(--Lightgrayishviolet)");
+          } else if (nameValue.length < 5) {
+            showError(errorText, "Name too short");
+            setInputBorder("var(--red)", nameInput);
+          } else if (cardNumberValue.length !== 16 || isNaN(cardNumberValue)) {
+            showError(errorText2, "Invalid card number");
+            setInputBorder("var(--red)", cardNumberInput);
+          } else if (mmValue.length !== 2 || isNaN(mmValue) || parseInt(mmValue) > 12) {
+            showError(errorText3, "Invalid expiration date");
+            setInputBorder("var(--red)", mmInput, yyInput);
+          } else if (yyValue.length !== 2 || isNaN(yyValue)) {
+            showError(errorText3, "Invalid expiration date");
+            setInputBorder("var(--red)", mmInput, yyInput);
+          } else if (cvcValue.length !== 3 || isNaN(cvcValue)) {
+            showError(errorText4, "Invalid CVC");
+            setInputBorder("var(--red)", cvcInput);
+          } else {
+            hideAllErrorMessages();
+            setInputBorder("var(--Lightgrayishviolet)");
+          }
+
+          cardNumberInput.value = formattedCardNumber;
+        });
+
+        function showError(errorElement, message) {
+          errorElement.innerHTML = message;
+          errorElement.style.visibility = "visible";
+        }
+
+        function hideAllErrorMessages() {
+          errorText.style.visibility = "hidden";
+          errorText2.style.visibility = "hidden";
+          errorText3.style.visibility = "hidden";
+          errorText4.style.visibility = "hidden";
+        }
+
+        function setInputBorder(color, ...inputFields) {
+          inputFields.forEach((input) => {
+            input.style.border = `2px solid ${color}`;
+          });
+        }
+      });
+      btn2.addEventListener("click", () => {
+        location.reload();
+      });
+    </script>
   </body>
 </html>
