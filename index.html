@@ -191,7 +191,7 @@
         width: 300px;
       }
 
-      @media screen and (max-width: 426px) {
+      @media screen and (max-width: 768px) {
         body {
           flex-direction: column;
           justify-content: space-between;
@@ -215,60 +215,89 @@
         }
 
         /* Card Mobile Style */
+        .img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
         .cardcontainer {
           display: flex;
+          justify-content: center;
+          align-content: center;
           flex-direction: column-reverse;
-          top: 0px;
-          left: 0px;
+          top: 0rem;
+          left: 0rem;
         }
         .card1,
         .card2 {
-          width: 15rem;
-          height: 9rem;
+          width: 16rem;
+          height: 10rem;
         }
         .card1 {
           position: relative;
-          top: -55px;
+          top: -70px;
           left: 20px;
           padding: 1rem;
         }
         .cvc {
-          top: 58px;
-          left: 190px;
+          top: 62px;
+          left: 200px;
           font-size: 10px;
         }
         .cardnumber {
           margin-top: 1.5rem;
-          font-size: 15px;
+          font-size: 20px;
         }
         .nameandexp {
           margin-right: 1.5rem;
-          margin-top: 0.5rem;
+          margin-top: 1rem;
           font-size: 10px;
+        }
+      }
+      @media (min-width: 375px) and (max-width: 420px) {
+        .cardcontainer {
+          left: 2rem;
+        }
+      }
+      @media (min-width: 425px) and (max-width: 540px) {
+        .cardcontainer {
+          left: 4rem;
+        }
+      }
+      @media (min-width: 540px) and (max-width: 770px) {
+        .cardcontainer {
+          left: 15rem;
+        }
+      }
+      @media (min-width: 770px) and (max-width: 1024px) {
+        .cardcontainer {
+          left: 5rem;
         }
       }
     </style>
   </head>
   <body>
-    <div class="img"></div>
-    <div class="cardcontainer">
-      <!-- Front Card -->
-      <div class="card1">
-        <div class="circle">
-          <span class="whiteroundcircle"></span>
-          <span class="whitebordercircle"></span>
+    <div class="img">
+      <div class="cardcontainer">
+        <!-- Front Card -->
+        <div class="card1">
+          <div class="circle">
+            <span class="whiteroundcircle"></span>
+            <span class="whitebordercircle"></span>
+          </div>
+          <h1 class="cardnumber">0000 0000 0000 0000</h1>
+          <div class="nameandexp">
+            <p class="cardname">JANE APPLESEED</p>
+            <p class="exp">00/00</p>
+          </div>
         </div>
-        <h1 class="cardnumber">0000 0000 0000 0000</h1>
-        <div class="nameandexp">
-          <p class="cardname">JANE APPLESEED</p>
-          <p class="exp">00/00</p>
+        <!-- Back Card -->
+        <div class="card2">
+          <p class="cvc">000</p>
         </div>
-      </div>
-      <!-- Back Card -->
-      <div class="card2">
-        <p class="cvc">000</p>
       </div>
     </div>
+
     <!-- Main Form Section -->
     <main class="container1">
       <form action="#" class="mainform" novalidate>
