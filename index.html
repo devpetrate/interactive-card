@@ -368,7 +368,6 @@
       const cardCvc = document.querySelector(".cvc");
       const page1 = document.querySelector(".container1");
       const form = document.querySelector(".mainform");
-      // const generalInput = document.querySelector("input");
       const nameInput = document.querySelector("#cardname1");
       const cardNumberInput = document.querySelector("#cardnumber1");
       const mmInput = document.querySelector("#mmm1");
@@ -424,7 +423,14 @@
           let yyValue = yyInput.value;
           let cvcValue = cvcInput.value;
 
-          if (nameValue.length >= 5 && cardNumberValue.length === 16 && !isNaN(cardNumberValue) && mmValue.length === 2 && yyValue.length === 2 && cvcValue.length === 3) {
+          if (
+            nameValue.length >= 5 &&
+            cardNumberValue.length === 16 &&
+            !isNaN(cardNumberValue) &&
+            mmValue.length === 2 &&
+            yyValue.length === 2 &&
+            cvcValue.length === 3
+          ) {
             page1.style.display = "none";
             page2.style.display = "flex";
             hideAllErrorMessages();
